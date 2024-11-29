@@ -1,0 +1,56 @@
+/* Gestaltung für den Hauptbereich der Showcase */
+
+.showcase-area {
+    /* Der Bereich ist 50% der Höhe des sichtbaren Bildschirms */
+    height: 50vh;
+
+    /* Hintergrund hat einen Farbverlauf und ein Bild */
+    background: linear-gradient(
+        rgba(240, 240, 240, 0.144),
+        rgba(255, 255, 255, 0.336)
+      ),
+      url(/media/MZ\ Home\ Deckblatt.jpg);
+    /* Das Bild wird so skaliert, dass es den gesamten Bereich ausfüllt */
+    background-size: cover;
+    /* Das Bild wird in der Mitte des Bereichs positioniert */
+    background-position: center;
+    background-repeat: no-repeat;
+}
+  
+/* Container innerhalb der Showcase */
+.showcase-container {
+    /* Flexbox wird verwendet, um die Elemente anzuordnen */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-size: 1.6rem;
+}
+
+/* Hauptitel im Showcase */
+.home-title {
+    /* Der Text wird in Großbuchstaben umgewandelt */
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 1.5em; 
+}
+
+  
+/* Media Query für Bildschirme mit maximal 600px Breite */
+@media (max-width: 600px) {
+    /* Stellt sicher, dass der Haupttitel auf kleineren Bildschirmen ausreichend Innenabstand hat */
+    .home-title {
+        margin-left: 5vw;
+        margin-right: 5vw; 
+    }
+}
+
+
+/* Diese Einstellung gilt für Bildschirm im Querformat und einer Höhe von 500px */
+@media (orientation: landscape) and (max-height: 500px) {
+    .showcase-area {
+      height: 50vmax;
+    }
+}
+  

@@ -1,0 +1,95 @@
+/* Gestaltung des Abschnitts Kontaktieren Sie uns */
+
+/*  Gestaltung für den Hauptcontainer Element */
+#contact {
+    padding: 5rem 0;
+    background: rgb(226, 226, 226);
+  }
+  
+.contact-container {
+    display: flex;
+    background: #fff;
+}
+
+.contact-img {
+    width: 50%;
+}
+  
+.contact-img img {
+    display: block;
+    height: 400px;
+    width: 100%;
+    object-position: center;
+    object-fit: cover;
+}
+
+.form-container input, 
+.form-container textarea {
+  font-family: "Poppins", sans-serif;
+}
+
+.form-container label {
+  color: darkgray;
+}
+
+.submit-btn {
+  display: inline-block;
+  padding: 0.5em 1.5em;
+  text-decoration: none;
+  border-radius: 50px;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  margin-top: 1em;
+  font-weight: small;
+  color: #fff;
+  background: #16a083;
+  transition: 0.3s ease-in-out;
+}
+
+.submit-btn:hover {
+  background: #117964;
+  transition: 0.3s ease-in-out;
+}
+
+
+/* Benachtrigungen beim versenden einer Nachricht im Kontaktformular */
+/* Fehlernachricht wird in rot angezeigt */
+.error {
+    color: red;
+}
+  
+/* Erfolgsmeldung wird in grün angezeigt */
+.success {
+    color: green;
+}
+
+
+/* Media Queries für unterschiedliche Bildschirmgrößen */
+/* Für Bildschirme mit einer Breite von maximal 500px */
+@media (max-width: 500px) {
+    .form-container {
+        width: 90%;
+      }
+    
+      .contact-container {
+        display: flex;
+        flex-direction: column;
+      }
+    
+      .contact-img {
+        width: 90%;
+        margin: 3rem auto;
+      }
+}
+
+/* Für Bildschirme mit einer Breite von minimalen Breite von 769px und einer maximalen Breite von 1200px */
+@media (min-width: 769px) and (max-width: 1200px) {
+    .img-container h3 {
+      font-size: 1.5rem;
+    }
+  
+    .img-container .button {
+      font-size: 0.7rem;
+    }
+}

@@ -1,0 +1,156 @@
+/* Gestaltung des Bereichs Anfahrt */
+
+#anfahrt {
+    /* Oberer Innenabstand beträgt 5rem und der unterer Innenabstand liegt bei 10rem */
+    padding: 5rem 0 10rem 0;
+}
+  
+/* Gestaltung der Überschrift im Abschnitt Anfahrt */
+#anfahrt h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 400;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    color: #555;
+}
+  
+/* Stil für den Container */
+.anfahrt-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Gestaltung vom Bild im Container  */
+.anfahrt-container img {
+    display: block;
+    width: 100%;
+    margin: auto;
+    max-height: 300px;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+
+/* Stil der Container für den Kontaktformular */
+.form-container {
+    padding: 1rem;
+    width: 50%;
+    margin: auto;
+}
+
+/* Stil für Eingabefelder innerhalb des Formularcontainers */
+.form-container input {
+    display: block;
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid #ddd;
+    padding: 1rem 0;
+    box-shadow: none;
+    outline: none;
+    margin-bottom: 1rem;
+    color: #444;
+    font-weight: 500;
+}
+
+/* Stile für textarea-Elemente innerhalb des Formularcontainers */
+.form-container textarea {
+    display: block;
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid #ddd;
+    color: #444;
+    outline: none;
+    padding: 1rem 0;
+    resize: none;
+}
+
+/* Gestaltung der Überschrift im Formularcontainer */
+.form-container h2 {
+    font-size: 2.7rem;
+    font-weight: 500;
+    color: #444;
+    margin-bottom: 1rem;
+    margin-top: -1.2rem;
+}
+  
+.form-container a {
+    font-size: 1.3rem;
+}
+   
+
+
+/* Anordnung Google Maps Karte */
+.google-map {
+    /* Linker Abstand der Karte, um Platz nach rechts zu schaffen */
+    margin-left: 30px; 
+    width: 700px;      
+    height: 450px;     
+    border: 0;         
+}
+  
+/* Allgemeine Stile des Container 2*/
+.container2 {
+    display: flex;                
+    justify-content: right;       
+    align-items: flex-start;      
+    max-width: 1200px;            
+    margin: 20px auto;            
+}
+/* Anordnung der Detailinformationen */
+.details {
+    max-width: 500px;      
+    /* Linker Abstand des Textbereichs, um Platz für die Google Maps Karte zu schaffen */       
+    margin-left: 40px;
+    padding-left: 1rem;            
+}
+  
+
+/* Media Queries für unterschiedliche Bildschirmgrößen */
+/* Für Bildschirme mit einer Breite von maximal 1024px */
+@media (max-width: 1024px) {
+    .google-map {
+        width: 600px;             
+        height: 400px;            
+    }
+}
+  
+/* Für Bildschirme mit einer Breite von maximal 768px */
+@media (max-width: 768px) {
+    .container2 {
+        /* Ändert die Flex-Richtung auf Spalte, um die Inhalte untereinander anzuordnen */
+        flex-direction: column;   
+        align-items: center;      
+    }
+  
+    .google-map {
+        width: 100%;              
+        height: 350px;            
+        margin-left: 0; 
+        padding: 3px; 
+        font-size: 10px          
+    }
+  
+    .details {
+        max-width: 100%;          
+        margin-left: 0;           
+        margin-top: 20px;         
+    }
+}
+  
+/* Für Bildschirme mit einer Breite von maximal 480px */
+@media (max-width: 480px) {
+    .google-map {
+        width: 100%;             
+        height: 300px;           
+        margin-left: 0;         
+    }
+  
+    .details {
+        max-width: 80%;          
+        margin-left: 0; 
+        /* Oberer Abstand beträgt 20px, um Platz für die Google Maps Karte zu schaffen */
+        margin-top: 20px;         
+    }
+}

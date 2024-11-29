@@ -1,0 +1,72 @@
+/* Gestaltung der Bereiche der Fachärzte */
+
+/* Stil für die Überschrift der Ärzte */
+.ärzte-heading {
+    text-align: center;
+    font-size: 3.4rem;
+    font-weight: 400;
+    color: #666;
+}
+
+/* Stil für den Container der Ärzte */
+.ärzte-container {
+    /* Flexbox verwenden */
+    display: flex;
+    /* Elemente  werden umgebrochen, wenn der Platz nicht ausreicht */
+    flex-wrap: wrap;
+    /* Innenabstand oben beträgt 50px und unten 30px */
+    padding: 50px 0px 30px 0px;
+}
+
+/* Stil für Bilder im Ärzte Container */
+.ärzte-container img {
+    display: block;
+    width: 250px;
+    height: 250px;
+    /* Abgerundete Ecken */
+    border-radius: 50%;
+    /* Bild wird skaliert und zugeschnitten */
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Stil für jeden einzelnen Ärzte Element */
+.ärzte-item {
+    /* Flexbox verwenden */
+    display: flex;
+    flex: 1 1 600px;
+    /* Platz gleichmäßig verteilen */
+    justify-content: space-evenly;
+    margin-bottom: 3rem;
+}
+  
+/* Styling für die Beschreibung eines Arztes */
+.arzt-description {
+    margin: auto 1.5rem;
+}
+
+/* Gestaltung der Titel innerhalb der Beschreibung */
+.font-title {
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: #444;
+}
+
+/* Gestaltung für den Text innerhalb der Beschreibung */
+.arzt-description p {
+    font-size: 1.4rem;
+    color: #555;
+    font-weight: 500;
+}
+
+/* Media Query für Bildschirme mit einer maximalen Breite von 500px*/
+@media (max-width: 500px) {
+ .ärzte-container img {
+   margin: auto;
+}
+  
+.ärzte-item {
+    flex-direction: column;
+    text-align: center;
+}
+}

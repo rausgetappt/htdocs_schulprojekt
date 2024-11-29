@@ -1,0 +1,116 @@
+/* Gestaltung des Abschnitts Fachrichtungen */
+
+#fachrichtungen {
+    /* Innenabstand von oben beträgt 5rem und von unten 10rem */
+    padding: 5rem 0 10rem 0;
+}
+
+/* Stil für die Überschrift im Abschnitt Fachrichtungen */
+#fachrichtungen h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 400;
+    margin-bottom: 40px;
+    /* Überschrift wird in Großbuchstaben wiedergegeben*/
+    text-transform: uppercase;
+    color: #555;
+}
+
+/* Stil für den Container im Abschnitt Fachrichtungen */
+.fachrichtungen-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Stil für das Bild im Container im Abschnitt Fachrichtungen */
+.fachrichtungen-container img {
+    display: block;
+    width: 100%;
+    margin: auto;
+    max-height: 300px;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Container für das Bild mit Textinhalt */
+.img-container {
+    margin: 0 1rem;
+    position: relative;
+}
+  
+/* Stil für den Titel im überlagerten Inhalt */
+.img-content h3 {
+    color: #fff;
+    font-size: 2.2rem;
+}
+  
+.img-content a {
+    font-size: 1.2rem;
+}
+
+/* Pseudo-Element nach dem Bildcontainer für den Überlagerungseffekt */
+.img-container::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.871);
+    /* Anfangs wird der Pseudo-Element unsichtbar gemacht */
+    opacity: 0;
+    z-index: 1;
+    transform: scaleY(0);
+    transform-origin: 100% 100%;
+    /* Übergangseffekt für alle Eigenschaften */
+    transition: all 0.3s ease-in-out;
+}
+  
+/* Im Hover-Effekt des Bildcontainers */
+.img-container:hover::after {
+    /* Nun wird Opazität auf 1 gesetzet, um das Pseudo-Element für den Patienten sichtbar zu machen */
+    opacity: 1;
+    /* Vertikale skalierung wird auf 1 gesetzt, um den Überlagerungseffekt anzuzeigen */
+    transform: scaleY(1);
+}
+
+/* Im Hover-Effekt des Bildcontainers wird der überlagerte Inhalt angezeigt */
+.img-container:hover .img-content {
+    opacity: 1;
+    top: 40%;
+}
+
+/* Bildcontainer mit überlagerten Inhalte */
+.img-content {
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    /* Zentrierung des Inhalts mit Verschiebung um 50% der Breite und Höhe */
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    z-index: 2;
+    text-align: center;
+    /* Übergangseffekt für alle Eigenschaften mit Verzögerung */
+    transition: all 0.3s ease-in-out 0.1s;
+}
+
+
+/* Media Queries für unterschiedliche Bildschirmgrößen */
+/* Für Bildschirme mit einer Breite von maximal 768px */
+@media (max-width: 768px) {
+    .fachrichtungen-container {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .fachrichtungen-type:not(:last-child) {
+      margin-bottom: 3rem;
+    }
+  
+    .fachrichtungen-type {
+      /* Fügt einen Schatten zu jeden .fachrichtungen-type-Elementen hinzu */
+      box-shadow: 5px 5px 10px 0 #aaa;
+    }
+  
+}

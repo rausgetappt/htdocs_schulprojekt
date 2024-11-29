@@ -1,0 +1,62 @@
+/* Gestaltung des Bereichs der Rezensionen */
+
+#rezensionen {
+    padding: 5rem 0;
+    background: rgba(243, 243, 243);
+  }
+  
+  /* Gestaltung der Ttitel für die Rezensionen */
+  .rezensionen-title {
+    text-align: center;
+    font-size: 2.8rem;
+    font-weight: 400;
+    color: #555;
+  }
+  
+  .rezensionen-container {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.4rem;
+    padding: 1rem;
+  }
+  
+  .rezensionen-box .rezensionen-text {
+    margin: 1rem 0;
+    color: #444;
+  }
+  
+  .rezensionen-box {
+    text-align: center;
+    padding: 1rem;
+  }
+ 
+  /* Design der Bilder von den Patienten */
+  .patient-photo img {
+    display: block;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+    margin: auto;
+}
+
+/* Darstellung der Sterne der Rezensionen */
+.star-rating {
+    /* Größe der Sterne anpassen */
+    font-size: 24px; /* Größe der Sterne anpassen */
+}
+  
+.star {
+    /* Farbe der Sterne */
+    color: gold; 
+}
+  
+/* Media Query für Bildschirme mit einer maximal Breite von 500px */
+@media (max-width: 500px) {
+    .rezensionen-container {
+        flex-direction: column;
+        text-align: center;
+      }
+
+}

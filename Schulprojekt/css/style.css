@@ -1,0 +1,160 @@
+/* Basisgestaltung meiner Website */
+
+/* Gestaltung des Box-Modells sowie deren  Pseudo-Elemente ::after und ::before */
+*,
+*::after,
+*::before {
+  /* Alle Elemente verwenden das Border-Box-Modell */
+  box-sizing: border-box; 
+  padding: 0; 
+  margin: 0;
+  scroll-behavior: smooth; 
+}
+
+/* Schriftgröße des HTML-Elements für responsive Designs anpassen*/
+.html {
+  font-size: 62.5%;
+}
+
+/* Gestaltung vom Body  */
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+/* Gestaltung vom Footer */
+#footer h2 {
+  text-align: center;
+  font-size: 1.3rem;
+  padding: 4rem;
+  font-weight: 500;
+  color: #ffffff;
+  background: rgb(9, 176, 153);
+}
+
+
+/* Utility-Klasse für Container */
+.container {
+  max-width: 1200px;
+  width: 90%;
+  margin: auto;
+}
+
+/* Allgemeien Gestaltung für Buttons */
+.button {
+  display: inline-block;
+  padding: 0.5em 1.5em;
+  text-decoration: none;
+  border-radius: 50px;
+  cursor: pointer;
+  outline: none;
+  margin-top: 1em;
+  text-transform: uppercase;
+  font-weight: small;
+}
+
+/* Gestaltung für primäre Buttons */
+.btn-primary {
+  color: #fff;
+  background: #16a083;
+}
+
+/* Hovereffekt für primäre Buttons */
+.btn-primary:hover {
+  background: #117964;
+  transition: background 0.3s ease-in-out;
+}
+ 
+/* Stil für den gesamten Inhalt */
+.content {
+    padding: 0 20vw;
+    font-size: 20px;
+    text-align: justify;
+}
+  
+/* Gestaltung des Buttons um nach oben automatisch zu scrollen */
+.go-top-btn {
+    position: fixed;
+    z-index: 1;
+    bottom: 25px;
+    right: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 50px;
+    width: 50px;
+    background: #fff;
+    border: 3px solid #000000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+  
+/* Bild für das Button */
+.go-top-btn img {
+    width: 40px;
+    height: 40px;
+}
+
+
+
+/* Benachrichtigung für die Patienten */
+/* Stil für die Benachrichtigung */
+.notification {
+  position: fixed;
+  top: 70px;
+  right: 20px; 
+  /* Hintergrundgarbe der Oberfläche in der sich die Benachtrigung */
+  background-color: #f2dede; /* Hintergrundfarbe */
+  /* Textfarbe der Benachtrigung */
+  color: #a94442; 
+  border: 1px solid #ebccd1; 
+  padding: 10px; 
+  max-width: 300px; 
+  display: none; 
+  z-index: 1000; 
+}
+
+.notification-content {
+  position: relative; 
+}
+
+.notification p {
+  /* Abstand für Absätze innerhalb der Benachrichtigung liegt bei 0*/
+  margin: 0; 
+}
+
+/* Gestaltung den Buttons zum Schließen der Benachtrigung */
+.close-btn {
+  position: absolute; 
+  top: 1px; 
+  right: 1px; 
+  /* Hintergrundfarbe des Buttons zum Schließen der Benachtrigung */
+  background-color: #d9534f; 
+  /* Textfarbe des Buttons zum Schließen der Benachtrigung */
+  color: white; 
+  border: none; 
+  padding: 1px 2px; 
+  font-size: 6px; 
+  cursor: pointer; 
+  margin-right: -5px; 
+  margin-top: -5px; 
+}
+
+.close-btn:hover {
+  /* Hintergrundfarbe bei Hover-Zustand des Schließen-Buttons */
+  background-color: #c9302c; 
+}
+
+/* Media Query für Bildschirme mit maximal 600px Breite */
+@media (max-width: 768px) {
+  .notification {
+    padding: 3px; 
+    font-size: 10px; 
+  }
+}
+
+/* Media Query für Bildschirme mit maximal 500px Breite */
+@media (max-width: 500px) {
+  html {
+    font-size: 65%;
+  }
+}
