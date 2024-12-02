@@ -40,7 +40,7 @@
     <!-- Button zum Scrollen nach oben -->
     <button class="go-top-btn">
       <!-- Buttondarstellung -->
-      <img src="/media/button icon.png" alt="arrow up" />
+      <img src="media/button icon.png" alt="arrow up" />
     </button>
 
     <!-- JavaScript wird eingebunden -->
@@ -108,7 +108,7 @@
         <!-- Container für das Bild -->
         <div class="about-img">
           <!--Bild und Alternativtext-->
-          <img src="/media/über uns.jpg" alt="Teamwork" />
+          <img src="media/über uns.jpg" alt="Teamwork" />
         </div>
       </div>
     </section>
@@ -123,7 +123,7 @@
         <div class="fachrichtungen-type Kardiologie">
           <div class="img-container">
             <!-- Bild für die Kardiologie -->
-            <img src="/media/Kardiologie.jpg" alt="Herz" />
+            <img src="media/Kardiologie.jpg" alt="Herz" />
             <div class="img-content">
               <h3>Kardiologie</h3>
               <!-- Link zur Wikipedia Webseite bezüglich Kardiologie -->
@@ -136,7 +136,7 @@
         <div class="fachrichtungen-type Augenheilkunde">
           <div class="img-container">
             <!-- Bild für die Augenheilkunde -->
-            <img src="/media/Augenheilkunde.jpg" alt="Auge" />
+            <img src="media/Augenheilkunde.jpg" alt="Auge" />
             <div class="img-content">
               <h3>Augenheilkunde</h3>
               <!-- Link zur Wikipedia Webseite bezüglich Augenheilkunde -->
@@ -149,7 +149,7 @@
         <div class="fachrichtungen-type Neurologie">
           <div class="img-container">
             <!-- Bild für die Neurologie -->
-            <img src="/media/Neurologie.jpg" alt="Gehirn" />
+            <img src="media/Neurologie.jpg" alt="Gehirn" />
             <div class="img-content">
               <h3>Neurologie</h3>
               <!-- Link zur Wikipedia Webseite bezüglich Neurologie -->
@@ -171,7 +171,7 @@
         <div class="ärzte-item">
           <!-- Bild vom Arzt -->
           <div class="arzt-img">
-            <img src="/media/Arzt1.jpg" alt="">
+            <img src="media/Arzt1.jpg" alt="">
           </div>
           <!-- Beschreibung vom Arzt -->
           <div class="arzt-description">
@@ -186,7 +186,7 @@
         <div class="ärzte-item">
           <!-- Bild vom Arzt -->
           <div class="arzt-img">
-            <img src="/media/ärztin2.jpg" alt="error">
+            <img src="media/ärztin2.jpg" alt="error">
           </div>
           <!-- Beschreibung vom Arzt -->
           <div class="arzt-description">
@@ -201,7 +201,7 @@
         <div class="ärzte-item">
           <!-- Bild vom Arzt -->
           <div class="arzt-img">
-            <img src="/media/ärztin3.jpg" alt="">
+            <img src="media/ärztin3.jpg" alt="">
           </div>
           <!-- Beschreibung vom Arzt -->
           <div class="arzt-description">
@@ -216,7 +216,7 @@
         <div class="ärzte-item">
           <!-- Bild vom Arzt -->
           <div class="arzt-img">
-            <img src="/media/Arzt4.png" alt="">
+            <img src="media/Arzt4.png" alt="">
           </div>
           <!-- Beschreibung vom Arzt -->
           <div class="arzt-description">
@@ -231,7 +231,7 @@
         <div class="ärzte-item">
           <!-- Bild vom Arzt -->
           <div class="arzt-img">
-            <img src="/media/Arzt5.jpg" alt="">
+            <img src="media/Arzt5.jpg" alt="">
           </div>
           <!-- Beschreibung vom Arzt -->
           <div class="arzt-description">
@@ -246,7 +246,7 @@
         <div class="ärzte-item">
           <!-- Bild vom Arzt -->
           <div class="arzt-img">
-            <img src="/media/ärztin6.jpg" alt="">
+            <img src="media/ärztin6.jpg" alt="">
           </div>
           <!-- Beschreibung vom Arzt -->
           <div class="arzt-description">
@@ -271,7 +271,7 @@
           <div class="patient-detail">
             <!-- Bild des Patienten-->
             <div class="patient-photo">
-              <img src="/media/Mensch icon.jpg" alt="" />
+              <img src="media/Mensch icon.jpg" alt="" />
               <!-- Name des Patienten-->
               <h4 class="patient-name">Ronja S.</h4>
             </div>
@@ -296,7 +296,7 @@
           <div class="patient-detail">
             <!-- Bild des Patienten-->
             <div class="patient-photo">
-              <img src="/media/Mensch icon.jpg" alt="" />
+              <img src="media/Mensch icon.jpg" alt="" />
               <!-- Name des Patienten-->
               <h4 class="patient-name">Amelia K.</h4>
             </div>
@@ -321,7 +321,7 @@
           <div class="patient-detail">
             <!-- Bild des Patienten-->
             <div class="patient-photo">
-              <img src="/media/Mensch icon.jpg" alt="" />
+              <img src="media/Mensch icon.jpg" alt="" />
               <!-- Name des Patienten-->
               <h4 class="patient-name">Stefanie M.</h4>
             </div>
@@ -388,7 +388,7 @@
       <div class="contact-container container">
         <!-- Bild für den Kontakt Bereich-->
         <div class="contact-img">
-          <img src="/media/kontakt.jpg" alt="Mitarbeiterin an der Rezeption" />
+          <img src="media/kontakt.jpg" alt="Mitarbeiterin an der Rezeption" />
         </div>
         <!--Container für das Kontaktformular--> 
           <form id="myForm" class="form-container" action="insert.php" method="POST">
