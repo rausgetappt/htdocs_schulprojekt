@@ -5,14 +5,13 @@ $password = "";
 $dbname = "kontakt";
 
 try {
-    // 3. Datenbankverbindung herstellen
+    // Datenbankverbindung herstellen
     $pdo = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8mb4", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Verbindung erfolgreich! ";
 
-    // 4. Überprüfen, ob das Formular über POST übermittelt wurde
+    // Überprüfen, ob das Formular über POST übermittelt wurde
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // 5. Formulardaten sicher behandeln
+        // Formulardaten sicher behandeln
         $anrede = htmlspecialchars(trim($_POST["anrede"]));
         $nachname = htmlspecialchars(trim($_POST["nachname"]));
         $vorname = htmlspecialchars(trim($_POST["vorname"]));
@@ -24,11 +23,23 @@ try {
         $anliegen = htmlspecialchars(trim($_POST["anliegen"]));
         $versicherungsart = htmlspecialchars(trim($_POST["versicherungsart"]));
 
-        // 6. SQL-Statement vorbereiten
+        // Terminverfügbarkeit prüfen
+        $checkStmt = $pdo->prepare("SELECT COUNT(*) FROM kontakt2 WHERE terminZeit = :terminZeit");
+        $checkStmt->bindParam(':terminZeit', $terminZeit);
+        $checkStmt->execute();
+        $existingEntries = $checkStmt->fetchColumn();
+
+        if ($existingEntries > 0) {
+            // Termin ist bereits belegt
+            echo "Dieser Termin ist leider schon vergeben. Bitte wählen Sie einen anderen.";
+            exit;
+        }
+
+        // SQL-Statement vorbereiten
         $stmt = $pdo->prepare("INSERT INTO kontakt2 (anrede, nachname, vorname, emailadresse, telefonnummer, fachbereich, terminZeit, krankenkassenNr, anliegen, versicherungsart)
                                VALUES (:anrede, :nachname, :vorname, :emailadresse, :telefonnummer, :fachbereich, :terminZeit, :krankenkassenNr, :anliegen, :versicherungsart)");
 
-        // 7. SQL-Parameter binden und ausführen
+        // SQL-Parameter binden und ausführen
         $stmt->bindParam(':anrede', $anrede);
         $stmt->bindParam(':nachname', $nachname);
         $stmt->bindParam(':vorname', $vorname);
@@ -40,13 +51,13 @@ try {
         $stmt->bindParam(':anliegen', $anliegen);
         $stmt->bindParam(':versicherungsart', $versicherungsart);
 
-        // 8. SQL-Statement ausführen und Erfolgsmeldung zurückgeben
+        // SQL-Statement ausführen und Erfolgsmeldung zurückgeben
         $stmt->execute();
-        echo "Daten erfolgreich in die Datenbank eingefügt!";
+        echo "Ihr Termin wurde erfolgreich gebucht!";
     }
 
 } catch (PDOException $e) {
+    // Fehler melden
     echo "Fehler: " . $e->getMessage();
 }
-
 ?>

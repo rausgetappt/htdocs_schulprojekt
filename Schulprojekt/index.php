@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="css/rezensionen.css" />
     <link rel="stylesheet" href="css/anfahrt.css" />
     <link rel="stylesheet" href="css/kontakt.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   </head>
 
   <!-- Hauptinhalt des HTML-Dokuments -->
@@ -44,6 +45,7 @@
     </button>
 
     <!-- JavaScript wird eingebunden -->
+    <script src="jquery.js"></script>
     <script src="script.js"></script>
 
     <!-- Navigation der Webseite -->
@@ -391,7 +393,7 @@
           <img src="media/kontakt.jpg" alt="Mitarbeiterin an der Rezeption" />
         </div>
         <!--Container für das Kontaktformular--> 
-          <form id="myForm" class="form-container" action="insert.php" method="POST">
+        <form id="myForm" class="form-container" action="insert.php" method="POST" onsubmit="submitToFormSubmit(event)">
             <h2>Kontaktieren Sie uns</h2>
             <div id="messages"></div>
         
@@ -399,6 +401,7 @@
             <select name="anrede" id="anrede" required>
                 <option value="Herr">Herr</option>
                 <option value="Frau">Frau</option>
+                
             </select>
         
             <input type="text" name="nachname" id="nachname" placeholder="Nachname" maxlength="25" required/>
@@ -412,8 +415,9 @@
                 <option value="Augenheilkunde">Augenheilkunde</option>
                 <option value="Neurologie">Neurologie</option>
             </select>
-        
-            <input type="datetime-local" name="terminZeit" id="terminZeit" required/>
+            <input 
+              type="datetime-local" id="terminZeit" name="terminZeit" placeholder="Wählen Sie Datum und Uhrzeit" required>
+<!-- <input type="datetime-local" name="terminZeit" id="terminZeit" required/> -->
         
             <label for="versicherungsart">Versicherungsart:</label>
             <select name="versicherungsart" id="versicherungsart" required>
@@ -425,6 +429,7 @@
             <textarea name="anliegen" id="anliegen" cols="30" rows="6" placeholder="Anliegen" required></textarea>
         
             <button id="submitBtn" type="submit" class="submit-btn">Senden</button>
+
         </form>      
       </div>
     </section>    

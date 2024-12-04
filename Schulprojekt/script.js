@@ -1,121 +1,176 @@
-// Button um nach oben zu scrollen
-
-// Sucht nach dem Element mit der Klasse go-top-btn und speichere es in der Variable goTopBtn
-const goTopBtn = document.querySelector('.go-top-btn');
-
-// Wenn die Seite gescrollt wird, ruft die Funktion 'checkHeight' auf
-window.addEventListener('scroll', checkHeight);
-
-
-// Die Funktion überprüft die Scrollhöhe und zeigt oder versteckt den go-top-btn (Pfeil nach oben Button) je nach Bedingung
-function checkHeight() {
-  if (window.scrollY > 200) {
-    // Zeigt den go-top-btn(Pfeil nach oben Button) an, wenn die Scrollhöhe größer als 200 ist
-    goTopBtn.style.display = "flex";
-  } else {
-    // Versteckt den go-top-btn (Pfeil nach oben Button), wenn die Scrollhöhe 200 oder weniger ist
-    goTopBtn.style.display = "none"; 
-  }
-}
-
-// Fügt einen Event-Listener hinzu, der das Scrollen zur oberen Position der Webseite ermöglicht, wenn der go-top-btn (Pfeil nach oben Button) geklickt wird
-goTopBtn.addEventListener('click', () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth" // Scrollt sanft nach oben zur Webseite
-  });
-});
-
-
+// Flatpickr.js: Integration für Datumsauswahl und Terminüberprüfung
 document.addEventListener('DOMContentLoaded', function() {
+  // Initialisierung des Datepickers
+  flatpickr("#terminZeit", {
+    enableTime: true,                // Uhrzeit-Auswahl aktivieren
+    dateFormat: "Y-m-d H:i",         // Datum und Uhrzeit im gewünschten Format
+    time_24hr: true,                 // 24-Stunden-Format
+    minDate: "today",                // Keine Termine in der Vergangenheit
+    minuteIncrement: 30,             // Zeit in 30-Minuten-Schritten
+    disable: [
+      function(date) {
+        const day = date.getDay();
+        return day === 0 || day === 6; // Wochenende (Samstag und Sonntag) deaktivieren
+      }
+    ],
+    onReady: function(selectedDates, dateStr, instance) {
+      const holidays = ["2024-12-25", "2024-12-26", "2024-01-01"];
+      instance.set("disable", [
+        ...instance.config.disable,
+        function(date) {
+          return holidays.includes(date.toISOString().split('T')[0]);
+        }
+      ]);
+    },
+    onChange: function(selectedDates, dateStr, instance) {
+      const time = selectedDates[0]?.getHours() || 0;
+      const isValidTime = time >= 8 && time < 18;
+      if (!isValidTime) {
+        alert("Bitte wählen Sie eine Zeit zwischen 08:00 und 18:00 Uhr.");
+        instance.clear();
+      }
+    }
+  });
+  
+
+  // Funktion: Ruft deaktivierte Termine und Feiertage vom Server ab
+  function fetchDisabledDates() {
+    fetch("fetch_disabled_dates.php")
+      .then(response => response.json())
+      .then(data => {
+        const disabledDates = data.disabledDates || []; // Geladene Termine/Feiertage
+        flatpickr("#terminZeit").set("disable", disabledDates);
+      })
+      .catch(error => console.error("Fehler beim Laden der deaktivierten Daten:", error));
+  }
+
+  // Formular-Submit-Handler
   document.getElementById('submitBtn').addEventListener('click', function(event) {
     event.preventDefault();
 
-    // Liest die Werte aus den Kontaktformularfeldern aus
-    var name = document.getElementById('nachname').value;
-    var email = document.getElementById('emailadresse').value;
-    var message = document.getElementById('anliegen').value;
-    var messages = document.getElementById('messages');
-
-    // Setzt die Fehler- und Erfolgsmeldungen zurück
-    messages.innerHTML = ''; 
-
-    // Die Variable stellt fest, ob ein Fehler aufgetreten ist
-    var hasError = false; 
-    // Array wird zur Speicherung von Fehlermeldungen verwendet
-    var errors = []; 
-
-    // Überprüft die Eingaben des Patienten in den Formularfeldern auf Richtigkeit
-    if (name === '') {
-      errors.push('Ihren Nachnamen');
-      hasError = true; 
-    }
-
-    if (email === '') {
-      errors.push('Ihre E-Mail-Adresse'); 
-      hasError = true; 
-    } else if (email.indexOf('@') === -1) {
-      errors.push('eine gültige E-Mail-Adresse');
-      hasError = true; 
-    }
-
-    if (message === '') {
-      errors.push('ein Anliegen'); 
-      hasError = true; 
-    }
-
-    // Zeigt dem Patienten Fehlermeldungen an
-    if (hasError) {
-      var errorMessage = 'Bitte geben Sie ' + errors.join(' und ') + ' ein.'; 
-      var errorElement = document.createElement('p'); 
-      errorElement.textContent = errorMessage; 
-      errorElement.className = 'error';
-      messages.appendChild(errorElement);
+    // Überprüft die ausgewählte Zeit auf Kollision
+    const selectedDate = document.getElementById('terminZeit').value;
+    if (!selectedDate) {
+      alert("Bitte wählen Sie ein Datum und eine Uhrzeit aus.");
       return;
     }
 
-    // Zeigt dem Patienten eine Erfolgsmeldung an
-    var successElement = document.createElement('p'); 
-    successElement.textContent = 'Ihre Nachricht wurde erfolgreich gesendet.'; 
-    successElement.className = 'success'; 
-    messages.appendChild(successElement);
-
-    // Setze das Formular zurück
-    document.getElementById('nachname').value = ''; 
-    document.getElementById('vorname').value = '';
-    document.getElementById('emailadresse').value = '';
-    document.getElementById('telefonnummer').value = '';
-    document.getElementById('fachbereich').value = 'Kardiologie'; 
-    document.getElementById('terminZeit').value = ''; 
-    document.getElementById('versicherungsart').value = 'Gesetzlich'; 
-    document.getElementById('krankenkassenNr').value = ''; 
-    document.getElementById('anliegen').value = ''; 
+    // Prüfung auf Terminverfügbarkeit
+    fetch("check_availability.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ appointment_date: selectedDate }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.available) {
+          alert("Der Termin ist verfügbar. Sie können das Formular absenden.");
+          document.getElementById('formular').submit(); // Formular absenden
+        } else {
+          alert("Dieser Termin ist leider bereits vergeben. Bitte wählen Sie einen anderen.");
+        }
+      })
+      .catch(error => console.error("Fehler bei der Verfügbarkeitsprüfung:", error));
   });
 });
 
+// Button für Scroll nach oben
+const goTopBtn = document.querySelector('.go-top-btn');
 
+window.addEventListener('scroll', function() {
+  if (window.scrollY > 200) {
+    goTopBtn.style.display = "flex";
+  } else {
+    goTopBtn.style.display = "none";
+  }
+});
 
-// Abschnitt für die Anzeige der Benachrichtigung für die Patienten
+goTopBtn.addEventListener('click', function() {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
 
-// Bezieht sich auf das Element mit der ID 'notification'
-const notification = document.getElementById('notification');
-
-
-// Diese Funktion zeigt die Benachtrigung für die Patienten an
+// Funktion: Benachrichtigung anzeigen/schließen
 function showNotification() {
-  // Indem die display-Eigenschaft auf block gesetzt wird, wird die Benachtrigung dem Patienten angezeigt
-  notification.style.display = 'block'; 
+  document.getElementById('notification').style.display = 'block';
 }
 
-// Diese Funktion ermöglicht es die Benachtrigung zu schließen
-// Indem die display-Eigenschaft auf none gesetzt wird, wird die Benachtrigung geschlossen
 function closeNotification() {
-  notification.style.display = 'none'; 
+  document.getElementById('notification').style.display = 'none';
 }
-// Zeigt die Informationsbenachtrigung dem Patienten an
-showNotification(); 
+
+showNotification();
 
 
 
+function submitToFormSubmit(event) {
+  event.preventDefault(); // Standard-Formular-Submission verhindern
+
+  // Formulardaten erfassen
+  const form = document.getElementById('myForm');
+  const formData = new FormData(form);
+
+  // Erste Anfrage: Daten an `insert.php` senden
+  fetch(form.action, {
+    method: form.method,
+    body: formData
+  })
+    .then(response => {
+      if (response.ok) {
+        console.log("Daten erfolgreich in die Datenbank eingespeist.");
+      } else {
+        throw new Error("Fehler beim Speichern der Daten in die Datenbank.");
+      }
+    })
+    .catch(error => console.error(error));
+
+  // Zweite Anfrage: Daten an `formsubmit.co` senden
+  fetch("https://formsubmit.co/firefamix@gmail.com", {
+    method: "POST",
+    body: formData
+  })
+    .then(response => {
+      if (response.ok) {
+        alert("Daten erfolgreich gesendet!");
+      } else {
+        throw new Error("Fehler beim Senden der Daten an formsubmit.co.");
+      }
+    })
+    .catch(error => console.error(error));
+}
 
 
+$( "submitBtn" ).on( "click", function() {
+  event.preventDefault(); // Standard-Formular-Submission verhindern
+
+  // Formulardaten erfassen
+  const form = document.getElementById('myForm');
+  const formData = new FormData(form);
+
+  // Erste Anfrage: Daten an insert.php senden
+  fetch(form.action, {
+    method: form.method,
+    body: formData
+  })
+    .then(response => {
+      if (response.ok) {
+        console.log("Daten erfolgreich in die Datenbank eingespeist.");
+      } else {
+        throw new Error("Fehler beim Speichern der Daten in die Datenbank.");
+      }
+    })
+    .catch(error => console.error(error));
+
+  // Zweite Anfrage: Daten an formsubmit.co senden
+  fetch("https://formsubmit.co/firefamix@gmail.com", {
+    method: "POST",
+    body: formData
+  })
+    .then(response => {
+      if (response.ok) {
+        alert("Daten erfolgreich gesendet!");
+      } else {
+        throw new Error("Fehler beim Senden der Daten an formsubmit.co.");
+      }
+    })
+    .catch(error => console.error(error));
+});
